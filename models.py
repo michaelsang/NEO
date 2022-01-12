@@ -1,3 +1,23 @@
+"""Represent models for near-Earth objects and their close approaches.
+
+The `NearEarthObject` class represents a near-Earth object. Each has a unique
+primary designation, an optional unique name, an optional diameter, and a flag
+for whether the object is potentially hazardous.
+
+The `CloseApproach` class represents a close approach to Earth by an NEO. Each
+has an approach datetime, a nominal approach distance, and a relative approach
+velocity.
+
+A `NearEarthObject` maintains a collection of its close approaches, and a
+`CloseApproach` maintains a reference to its NEO.
+
+The functions that construct these objects use information extracted from the
+data files from NASA, so these objects should be able to handle all of the
+quirks of the data set, such as missing names and unknown diameters.
+
+You'll edit this file in Task 1.
+"""
+
 from helpers import cd_to_datetime, datetime_to_str
 
 
@@ -28,12 +48,11 @@ class NearEarthObject:
         # and a missing diameter being represented by `float('nan')`.
         self.designation = info["designation"]
         self.name = None if len(info['name']) == 0 else info['name']
-        self.diameter = float(info["diameter"] if info["diameter"] else 'nan')
+        self.diameter = float(info["diameter"] if info["diameter"] else 'NaN')
 
 #       self.diameter = info["diameter"]
 #        if not self.diameter:
 #            self.diameter = float("nan")
-
 
         self.hazardous = info["hazardous"]
         if not self.hazardous:
@@ -47,11 +66,12 @@ class NearEarthObject:
         # Create an empty initial collection of linked approaches.
         self.approaches = []
 
+
     @property
     def fullname(self):
         """Return a representation of the full name of this NEO."""
         # TODO: Use self.designation and self.name to build a fullname for this object.
-        return f"The full name of this NEO is {self.designation} + {self.name}"
+        return f"Full name of this NEO is {self.designation} + {self.name}"
 
     def __str__(self):
         """Return `str(self)`."""
@@ -62,7 +82,7 @@ class NearEarthObject:
             chk = "hazardous"
         else:
             chk = "not hazardous"
-        return f"A NearEarthObject {self.name} has diameter of {self.diameter} and it is {chk}"
+        return f"A NearEarthObject {self.name} with a diameter of {self.diameter} and it is {chk}"
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
@@ -126,7 +146,7 @@ class CloseApproach:
         # TODO: Use this object's attributes to return a human-readable string representation.
         # The project instructions include one possibility. Peek at the __repr__
         # method for examples of advanced string formatting.
-        return f"A CloseApproach ...on {datetime_to_str(self.time)}, approaches Earth at a distance of {self.distance} au and a velocity of {self.velocity} km/s."
+        return f"A CloseApproach on {datetime_to_str(self.time)}, approaches Earth at a distance of {self.distance} au and a velocity of {self.velocity} km/s."
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
@@ -134,11 +154,12 @@ class CloseApproach:
                 f"velocity={self.velocity:.2f}, neo={self.neo!r})")
 
 
-from models import NearEarthObject, CloseApproach
-neo2 = NearEarthObject(designation='2020 FK', name='One REALLY BIG fake asteroid', diameter=12.345, hazardous=True)
-print(neo2)
+#Unit Tests on Pycharm
+#from models import NearEarthObject
+#neo2 = NearEarthObject(designation='2020 FK', name='One REALLY BIG fake asteroid', diameter=12.345, hazardous=True)
+#print(neo2)
 
 
-from models import CloseApproach
-cap1 = CloseApproach(designation=123, time='1900-Dec-27 12:12', distance=10, velocity=0.1)
-print(cap1)
+#from models import CloseApproach
+#cap1 = CloseApproach(designation=123, time='1900-Dec-27 12:12', distance=10, velocity=0.1)
+#print(cap1)
