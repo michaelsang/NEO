@@ -1,0 +1,4 @@
+PS C:\Users\mkhsa\GitHub\NEO> python main.py query --date 2020-01-01 --limit 5 --outfile results.csv
+PS C:\Users\mkhsa\GitHub\NEO> python main.py query --date 2020-01-01 --limit 5 --outfile results.json
+PS C:\Users\mkhsa\GitHub\NEO> python main.py query --start-date 2020-01-01 --end-date 2020-12-31 --hazardous --min-diameter 0.25 --max-distance 0.1 --limit 5 --outfile results.json
+PS C:\Users\mkhsa\GitHub\NEO>
