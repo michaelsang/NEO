@@ -79,7 +79,8 @@ class AttributeFilter:
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
-###########
+#
+
 class DateFilter(AttributeFilter):
     """
     class DateFilter is a subclass of AttributeFilter superclass.
