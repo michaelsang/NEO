@@ -12,6 +12,7 @@ You'll edit this file in Tasks 2 and 3.
 
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
+
     A `NEODatabase` contains a collection of NEOs and a collection of close
     approaches. It additionally maintains a few auxiliary data structures to
     help fetch NEOs by primary designation or by name and to help speed up
@@ -19,6 +20,7 @@ class NEODatabase:
     """
     def __init__(self, neos, approaches):
         """Create a new `NEODatabase`.
+
         As a precondition, this constructor assumes that the collections of NEOs
         and close approaches haven't yet been linked - that is, the
         `.approaches` attribute of each `NearEarthObject` resolves to an empty
@@ -37,6 +39,8 @@ class NEODatabase:
         self._neos = neos
         self._approaches = approaches
 
+        # TODO: What additional auxiliary data structures will be useful?
+        # TODO: Link together the NEOs and their close approaches.
         #dictionary mapping designation to neo in __init__ method.
         self.neo_by_designation = {neo.designation: neo for neo in self._neos}  #map NEO designation
         self.neo_by_name = {neo.name: neo for neo in self._neos}  #map NEO names
@@ -46,12 +50,6 @@ class NEODatabase:
             approach.neo = neo #assign the neo to neo attribute of approach
             neo.approaches.append(approach)  # append the approach to the approaches of neo
 
-
-
-
-        # TODO: What additional auxiliary data structures will be useful?
-
-        # TODO: Link together the NEOs and their close approaches.
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
@@ -63,8 +61,8 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its primary designation.
-
         return self.neo_by_designation.get(designation)
+
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -79,6 +77,7 @@ class NEODatabase:
         # TODO: Fetch an NEO by its name.
         return self.neo_by_name.get(name)
 
+
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
         This generates a stream of `CloseApproach` objects that match all of the
@@ -91,11 +90,11 @@ class NEODatabase:
         """
         # TODO: Generate `CloseApproach` objects that match all of the filters.
 
-        for approach in self._approaches:
+        for approach in self._approaches:  #loop over approaches per mentor
             match = True
-            for flt in filters:
+            for flt in filters: #loop over all filters
                 if flt(approach) is not True:
                     match = False
-                    break
+                    break  #no longer need to check other filters
             if match is True:
                 yield approach
