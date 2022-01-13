@@ -17,7 +17,6 @@ You'll edit this file in Task 2.
 import csv
 import json
 
-# TO UPDATE IN UDACITY WORKSPACE
 from models import NearEarthObject, CloseApproach
 
 
@@ -37,8 +36,7 @@ def load_neos(neo_csv_path):
             name = row[4]
             pha = row[7]
             diameter = row[15]
-            neo = NearEarthObject(designation=pdes, name=name,
-                                  diameter=diameter, hazardous=pha)
+            neo = NearEarthObject(designation=pdes, name=name, diameter=diameter, hazardous=pha)
             #print(neo)
             neos.append(neo)
     return neos
@@ -50,7 +48,7 @@ def load_approaches(cad_json_path):
     :param neo_csv_path: A path to a JSON file containing data about close approaches.
     :return: A collection of `CloseApproach`es.
     """
-    # TODO: Load close approach data from the given JSON file.
+    # TODO: Load close approach *data* from the given JSON file.
     approaches = []
     with open(cad_json_path) as infile:
         reader = json.load(infile)
@@ -59,16 +57,15 @@ def load_approaches(cad_json_path):
             cd = cad[3]
             dist = cad[4]
             vel = cad[7]
-            approach = CloseApproach(designation=desig, time=cd, distance=dist,
-                                     velocity=vel)
+            approach = CloseApproach(designation=desig, time=cd, distance=dist, velocity=vel)
             #print(approach)
             approaches.append(approach)
     return approaches
 
+#commented out after Pycharm unit testing
+#inputfilename="./data/neos.csv"
+#load_neos(inputfilename)
 
-inputfilename="./data/neos.csv"
-load_neos(inputfilename)
-
-inputfilenameJson="./data/cad.json"
-load_approaches(inputfilenameJson)
+#inputfilenameJson="./data/cad.json"
+#load_approaches(inputfilenameJson)
 
